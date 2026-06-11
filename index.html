@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,51 +9,52 @@
 <body>
 
     <div class="products-container">
-        <h1>Estoque de materias</h1>
-        <p>Lista de materias</p>
-    <div class="products" id="input-nome">
-        <fieldset>
-            <label for="input-nome">Selecione uma opção de material para adcionar</label>
-            <select name="material" id="input-nome">
-                <option value="" disabled selected>Lista de materias</option>
-                <option value="Luvas-de-procedimento">Luvas de procedimento</option>
-                <option value="Máscaras-cirúrgicas">Máscaras cirúrgicas</option>
-                <option value="Seringas-5-ml">Seringas 5 ml</option>
-                <option value="Agulhas 25x7">Agulhas 25x7</option>
-                <option value="Gazes-estéreis">Gazes estéreis</option>
-                <option value="Algodão-hidrófilo">Algodão hidrófilo</option>
-                <option value="Álcool-70%">Álcool 70%</option>
-                <option value="Soro-fisiológico-0,9%">Soro fisiológico 0,9%</option>
-                <option value="Ataduras-de-crepe">Ataduras de crepe</option>
-                <option value="Cotonetes">Cotonetes</option>
-                <option value="Glicosímetros">Glicosímetros</option>
-                <option value="Fitas-de-glicose">Fitas de glicose</option>
-                <option value="Termômetros-digitais">Termômetros digitais</option>
-            </select>
-        </fieldset>
+        <h1>Estoque de materiais</h1>
+        <p>Lista de materiais</p>
+        
+        <div class="products">
+            <fieldset>
+                <label for="input-nome">Selecione uma opção de material para adicionar:</label>
+                <select name="material" id="input-nome">
+                    <option value="" disabled selected>Lista de materiais</option>
+                    <option value="Luvas-de-procedimento">Luvas de procedimento</option>
+                    <option value="Máscaras-cirúrgicas">Máscaras cirúrgicas</option>
+                    <option value="Seringas-5-ml">Seringas 5 ml</option>
+                    <option value="Agulhas-25x7">Agulhas 25x7</option>
+                    <option value="Gazes-estéreis">Gazes estéreis</option>
+                    <option value="Algodão-hidrófilo">Algodão hidrófilo</option>
+                    <option value="Álcool-70%">Álcool 70%</option>
+                    <option value="Soro-fisiológico-0,9%">Soro fisiológico 0,9%</option>
+                    <option value="Ataduras-de-crepe">Ataduras de crepe</option>
+                    <option value="Cotonetes">Cotonetes</option>
+                    <option value="Glicosímetros">Glicosímetros</option>
+                    <option value="Fitas-de-glicose">Fitas de glicose</option>
+                    <option value="Termômetros-digitais">Termômetros digitais</option>
+                </select>
+            </fieldset>
 
-        <div class="button">
-            <input type="number" id="input-quantidade" placeholder="Ex: 4">
-            <button id="btn-cadastrar">Cadastrar</button>
-        </div>
-
+            <div class="button">
+                <input type="number" id="input-quantidade" placeholder="Ex: 4">
+                <button id="btn-cadastrar">Cadastrar</button>
+            </div>
         </div>
         
         <footer>
             <div>
-                <h2>Lista de materais disponiveis</h2>
-                <table id="lista-materiais">
+                <h2>Lista de materiais cadastrados</h2>
+                <table>
                     <thead>
                         <tr>
-                        <th>Materais</th>
-                        <th>Quantidade</th>
+                            <th>Materiais</th>
+                            <th>Quantidade</th>
                         </tr>
-                        <tbody id="corpo-tabela"></tbody>
                     </thead>
+                    <tbody id="corpo-tabela"></tbody>
                 </table>
             </div>
         </footer>
+    </div>
     
-    <script src="main.js" ></script>
+    <script src="main.js"></script>
 </body>
 </html>
