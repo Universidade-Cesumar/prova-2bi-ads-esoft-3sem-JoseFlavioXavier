@@ -11,6 +11,9 @@
     <div class="products-container">
         <h1>Estoque de materiais</h1>
         <p>Lista de materiais</p>
+        <a href="retirada.js">
+            <button class="button">Fazer uma retirada</button>
+        </a>
         
         <div class="products">
             <fieldset>
@@ -36,6 +39,7 @@
             <div class="button">
                 <input type="number" id="input-quantidade" placeholder="Ex: 4">
                 <button id="btn-cadastrar">Cadastrar</button>
+                <button class="btn-excluir">Excluir item</button>
             </div>
         </div>
         
@@ -47,6 +51,7 @@
                         <tr>
                             <th>Materiais</th>
                             <th>Quantidade</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody id="corpo-tabela"></tbody>
