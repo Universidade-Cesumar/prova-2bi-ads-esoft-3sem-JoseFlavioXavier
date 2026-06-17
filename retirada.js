@@ -16,10 +16,15 @@ async function carregarTabelaRetirada() {
 
         tabela.innerHTML = "";
         dados.forEach(item => {
-            const novaLinha = document.createElement("tr");
+            const novaLinha = document.createElement("tr"); 
             novaLinha.innerHTML = `
                 <td>${item.material}</td>
                 <td>${item.quantidade}</td>
+                <td>
+                    <input type="number" class="input-retirada" placeholder="Qtd">
+                    <button class="btn-baixar" data-id="${item.id}">Baixar</button>
+                    <button class="btn-excluir" data-id="${item.id}">Excluir</button>
+                </td>
             `;
             tabela.appendChild(novaLinha);
         });
