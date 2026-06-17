@@ -17,8 +17,11 @@ async function carregarTabela() {
         dados.forEach(item => {
             const novaLinha = document.createElement("tr");
             novaLinha.innerHTML = `
-                <td>${item.material}</td>
-                <td>${item.quantidade}</td>
+            <td>${item.material}</td>
+            <td>${item.quantidade}</td>
+            <td>
+                <button class="btn-excluir" onclick="deletarItem('${item.Nome}')">Excluir</button>
+            </td>
             `;
             tabela.appendChild(novaLinha);
         });
@@ -46,7 +49,7 @@ btnCadastra.addEventListener('click', async () => {
         body: JSON.stringify({ material: material, quantidade: quantidade })
     });
 
-// 
+//limpar
     inputMaterial.value = "";
     inputQuantidade.value = "";
 
@@ -56,3 +59,23 @@ btnCadastra.addEventListener('click', async () => {
 
 
 carregarTabela();
+
+async function deletarItem(id) {
+    if(!confirm("Tem certeza que deseja de excluir esse iten?"))
+        return;
+    try{
+        const resposta = await fetch(`${url}/${id}`,{
+            method: 'DELETE'
+        });
+
+        if(!resposta.ok){
+            throw new Error("Erro ao deletar item");
+        }
+        
+        carregarTabela();
+        
+    } catch(erro){
+        console.error("Falha ao deletar o item", erro);
+        alert("Falha ao excluir o item");
+    }
+}
