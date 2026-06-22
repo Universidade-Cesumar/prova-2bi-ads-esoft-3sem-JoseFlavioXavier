@@ -1,105 +1,84 @@
-/* Reset básico para manter a consistência */
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: #f4f7f6;
-    color: #333;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
 }
 
 .products-container {
-    background-color: #ffffff;
-    width: 100%;
-    max-width: 600px;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-h1 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-fieldset {
-    border: none;
-    margin: 20px 0;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-select, input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.button {
+.nav-container {
     display: flex;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
-button {
+.button, .button-estoque {
+    padding: 10px 20px;
+    cursor: pointer;
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
     border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
-button:hover {
+.button:hover, .button-estoque:hover {
     background-color: #0056b3;
 }
 
-/* Estilização da Tabela */
-footer {
-    margin-top: 30px;
-    border-top: 2px solid #eee;
-    padding-top: 20px;
+.products {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.referencia-materiais {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.tabela-referencia {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+.tabela-referencia td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 th, td {
-    text-align: left;
     padding: 12px;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
+    text-align: left;
 }
 
-th {
-    background-color: #f8f9fa;
-    color: #555;
-}
-
-.btn-excluir{
-     background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
+.estoque-critico {
+    background-color: #ffcccc !important;
+    color: #d9534f;
     font-weight: bold;
-    transition: background 0.3s;
-
 }
