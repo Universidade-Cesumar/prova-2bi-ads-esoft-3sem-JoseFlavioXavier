@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dashboard - Estoque</title>
+</head>
+<body>
+    <main>
+        <div class="products-container">
+            <h1>Estoque de materiais</h1>
+            <p>Lista de materiais</p>
+            
+            <div class="nav-container">
+                <a href="index.html">
+                    <button class="button">Cadastrar materiais</button>
+                </a>
+                <a href="estoque.html">
+                    <button class="button-estoque">Estoque/dashboard</button>
+                </a>
+            </div>
+            
+            <div class="products">
+                <fieldset>
+                    <label for="input-busca">Pesquisar material:</label>
+                    <input type="text" id="input-busca" placeholder="Digite o nome do material...">
+                </fieldset>
+
+                <div class="info-estoque">
+                    <p>Total itens: <span id="total-itens">0</span></p>
+                </div>
+            </div>
+
+            <div class="referencia-materiais">
+                <h3>Lista de Referência</h3>
+                <table class="tabela-referencia">
+                    <thead><tr><th>Materiais Disponíveis</th></tr></thead>
+                    <tbody>
+                        <tr><td>Luvas de procedimento</td></tr>
+                        <tr><td>Máscaras cirúrgicas</td></tr>
+                        <tr><td>Seringas 5 ml</td></tr>
+                        <tr><td>Agulhas 25x7</td></tr>
+                        <tr><td>Gazes estéreis</td></tr>
+                        <tr><td>Algodão hidrófilo</td></tr>
+                        <tr><td>Álcool 70%</td></tr>
+                        <tr><td>Soro fisiológico 0,9%</td></tr>
+                        <tr><td>Ataduras de crepe</td></tr>
+                        <tr><td>Cotonetes</td></tr>
+                        <tr><td>Glicosímetros</td></tr>
+                        <tr><td>Fitas de glicose</td></tr>
+                        <tr><td>Termômetros digitais</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            <footer>
+                <div>
+                    <h2>Lista de materiais cadastrados</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Materiais</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-materiais"></tbody>
+                    </table>
+                </div>
+            </footer>
+        </div>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
