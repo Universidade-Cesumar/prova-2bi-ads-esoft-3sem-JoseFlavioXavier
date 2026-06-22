@@ -1,7 +1,7 @@
 const url = "https://6a29f8bcf59cb8f65f1de3eb.mockapi.io/api/v1/Materiai";
 
 const btnCadastra = document.getElementById("btn-cadastrar");
-const tabela = document.getElementById("corpo-tabela");
+const tabela = document.getElementById("lista-materiais");
 
 // Função para buscar e exibir os dados
 async function carregarTabela() {
