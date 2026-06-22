@@ -1,15 +1,16 @@
 const url = "https://6a29f8bcf59cb8f65f1de3eb.mockapi.io/api/v1/Materiai";
 const btnConfirmaRetirada = document.getElementById("btn-exclui");
-const tabela = document.getElementById("corpo-tabela");
+const tabela = document.getElementById("lista-materiais");
 const inputQuantidade = document.getElementById("input-quantidade");
 
-
+//chama a função para confirmar a retirada
 inputQuantidade.addEventListener('blur', () => {
     if (inputQuantidade.value > 0) {
         alert("Pressione o botão 'Confirmar retirada' para finalizar a operação.");
     }
 });
 
+//função para carregar a tabela atualizada coms os itens retiados
 async function carregarTabelaRetirada() {
     try {
         const resposta = await fetch(url);
@@ -30,6 +31,7 @@ async function carregarTabelaRetirada() {
     }
 }
 
+//valida a retirada
 function validarRetirada(estoqueAtual, quantidadeRetirada) {
     if (quantidadeRetirada <= 0) return false;
     return quantidadeRetirada <= estoqueAtual;
