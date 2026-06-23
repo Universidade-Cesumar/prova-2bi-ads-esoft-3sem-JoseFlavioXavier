@@ -82,7 +82,9 @@ function validarRetirada(estoqueAtual, quantidadeRetirada) {
     return quantidadeRetirada <= estoqueAtual;
 }
 
-carregarTabela();
+if (typeof window !== 'undefined') {
+    carregarTabela();
+}
 
 async function deletarItem(nome) {
     if (!confirm("Tem certeza que deseja excluir esse item?"))
