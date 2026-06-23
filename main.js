@@ -1,7 +1,7 @@
 const url = "https://6a29f8bcf59cb8f65f1de3eb.mockapi.io/api/v1/Materiai";
 
-const btnCadastra = document.getElementById("btn-cadastrar");
-const tabela = document.getElementById("lista-materiais");
+const btnCadastra = typeof document !== 'undefined' ? document.getElementById("btn-cadastrar") : null;
+const tabela = typeof document !== 'undefined' ? document.getElementById("lista-materiais") : null;
 
 async function carregarTabela() {
     try {
@@ -33,49 +33,51 @@ async function carregarTabela() {
     }
 }
 
-btnCadastra.addEventListener('click', async () => {
-    const inputMaterial = document.getElementById("input-nome");
-    const inputQuantidade = document.getElementById("input-quantidade");
+if (btnCadastra) {
+    btnCadastra.addEventListener('click', async () => {
+        const inputMaterial = document.getElementById("input-nome");
+        const inputQuantidade = document.getElementById("input-quantidade");
 
-    const material = inputMaterial.value.trim();
-    const quantidade = parseInt(inputQuantidade.value);
+        const material = inputMaterial.value.trim();
+        const quantidade = parseInt(inputQuantidade.value);
 
-    if (!quantidade || !material) {
-        alert("Preencha todos os campos");
-        return;
-    }
+        if (!quantidade || !material) {
+            alert("Preencha todos os campos");
+            return;
+        }
 
-    const respostaApi = await fetch(url);
-    const dados = await respostaApi.json();
+        const respostaApi = await fetch(url);
+        const dados = await respostaApi.json();
 
-    const itemExistente = dados.find(
-        item => item.material.toLowerCase() === material.toLowerCase()
-    );
+        const itemExistente = dados.find(
+            item => item.material.toLowerCase() === material.toLowerCase()
+        );
 
-    if (itemExistente) {
-        const novaQuantidade = parseInt(itemExistente.Qunatidade) + quantidade;
+        if (itemExistente) {
+            const novaQuantidade = parseInt(itemExistente.Qunatidade) + quantidade;
 
-        await fetch(`${url}/${itemExistente.Nome}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                material: itemExistente.material, 
-                Qunatidade: novaQuantidade 
-            })
-        });
-    } else {
-        await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ material: material, Qunatidade: quantidade })
-        });
-    }
+            await fetch(`${url}/${itemExistente.Nome}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    material: itemExistente.material, 
+                    Qunatidade: novaQuantidade 
+                })
+            });
+        } else {
+            await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ material: material, Qunatidade: quantidade })
+            });
+        }
 
-    inputMaterial.value = "";
-    inputQuantidade.value = "";
+        inputMaterial.value = "";
+        inputQuantidade.value = "";
 
-    carregarTabela();
-});
+        carregarTabela();
+    });
+}
 
 function validarRetirada(estoqueAtual, quantidadeRetirada) {
     if (quantidadeRetirada <= 0) return false;
