@@ -1,75 +1,83 @@
 const url = "https://6a29f8bcf59cb8f65f1de3eb.mockapi.io/api/v1/Materiai";
-const btnConfirmaRetirada = document.getElementById("btn-exclui");
 const tabela = document.getElementById("lista-materiais");
-const inputQuantidade = document.getElementById("input-quantidade");
-
-inputQuantidade.addEventListener('blur', () => {
-    if (inputQuantidade.value > 0) {
-        alert("Pressione o botão 'Confirmar retirada' para finalizar a operação.");
-    }
-});
-
-async function carregarTabelaRetirada() {
-    try {
-        const resposta = await fetch(url);
-        const dados = await resposta.json();
-        
-        tabela.innerHTML = "";
-        
-        dados.forEach(item => {
-            const novaLinha = document.createElement("tr");
-            novaLinha.innerHTML = `
-                <td>${item.material}</td>
-                <td>${item.Qunatidade}</td>
-            `;
-            tabela.appendChild(novaLinha);
-        });
-    } catch (erro) {
-        console.error("Erro ao carregar tabela:", erro);
-    }
-}
+const inputRetirada = document.getElementById("input-retirada");
 
 function validarRetirada(estoqueAtual, quantidadeRetirada) {
     if (quantidadeRetirada <= 0) return false;
     return quantidadeRetirada <= estoqueAtual;
 }
 
-if (btnConfirmaRetirada) {
-    btnConfirmaRetirada.addEventListener('click', async () => {
-        const materialSelecionado = document.getElementById("input-nome").value;
-        const qtdRetirada = parseInt(document.getElementById("input-quantidade").value);
-
-        if (!materialSelecionado || isNaN(qtdRetirada)) {
-            alert("Selecione um material e insira uma quantidade!");
-            return;
-        }
-
+async function carregarTabelaRetirada() {
+    try {
         const resposta = await fetch(url);
-        const lista = await resposta.json();
-        const item = lista.find(i => i.material === materialSelecionado);
+        const dados = await resposta.json();
 
-        if (!item) {
-            alert("Material não encontrado.");
-            return;
-        }
+        tabela.innerHTML = "";
 
-        const estoqueAtual = parseInt(item.Qunatidade);
+        dados.forEach(item => {
+            const novaLinha = document.createElement("tr");
+            novaLinha.innerHTML = `
+                <td>${item.material}</td>
+                <td>${item.Qunatidade}</td>
+                <td>
+                    <button class="btn-baixar">Retirar</button>
+                    <button class="btn-excluir">Excluir</button>
+                </td>
+            `;
 
-        if (validarRetirada(estoqueAtual, qtdRetirada)) {
-            const novaQuantidade = estoqueAtual - qtdRetirada;
+            // Botão de retirada (PUT)
+            const btnBaixar = novaLinha.querySelector(".btn-baixar");
+            btnBaixar.addEventListener("click", async () => {
+                const qtdRetirada = parseInt(inputRetirada.value);
 
-            await fetch(`${url}/${item.Nome}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ Qunatidade: novaQuantidade })
+                if (!qtdRetirada || isNaN(qtdRetirada)) {
+                    alert("Insira uma quantidade para retirar!");
+                    return;
+                }
+
+                const estoqueAtual = parseInt(item.Qunatidade);
+
+                if (validarRetirada(estoqueAtual, qtdRetirada)) {
+                    const novaQuantidade = estoqueAtual - qtdRetirada;
+
+                    await fetch(`${url}/${item.Nome}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ Qunatidade: novaQuantidade })
+                    });
+
+                    alert(`Retirada de ${qtdRetirada} unidade(s) de "${item.material}" realizada!`);
+                    inputRetirada.value = "";
+                    carregarTabelaRetirada();
+                } else {
+                    alert("Quantidade insuficiente ou inválida!");
+                }
             });
 
-            alert("Retirada realizada!");
-            carregarTabelaRetirada();
-        } else {
-            alert("Quantidade insuficiente ou inválida!");
-        }
-    });
+            // Botão de excluir (DELETE)
+            const btnExcluir = novaLinha.querySelector(".btn-excluir");
+            btnExcluir.addEventListener("click", async () => {
+                if (!confirm(`Deseja excluir "${item.material}"?`)) return;
+
+                try {
+                    const resposta = await fetch(`${url}/${item.Nome}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (!resposta.ok) throw new Error("Erro ao deletar");
+
+                    carregarTabelaRetirada();
+                } catch (erro) {
+                    console.error("Falha ao deletar:", erro);
+                    alert("Falha ao excluir o item!");
+                }
+            });
+
+            tabela.appendChild(novaLinha);
+        });
+    } catch (erro) {
+        console.error("Erro ao carregar tabela:", erro);
+    }
 }
 
 carregarTabelaRetirada();
