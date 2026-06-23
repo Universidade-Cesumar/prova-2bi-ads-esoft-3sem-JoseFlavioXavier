@@ -3,14 +3,12 @@ const btnConfirmaRetirada = document.getElementById("btn-exclui");
 const tabela = document.getElementById("lista-materiais");
 const inputQuantidade = document.getElementById("input-quantidade");
 
-//chama a função para confirmar a retirada
 inputQuantidade.addEventListener('blur', () => {
     if (inputQuantidade.value > 0) {
         alert("Pressione o botão 'Confirmar retirada' para finalizar a operação.");
     }
 });
 
-//função para carregar a tabela atualizada coms os itens retiados
 async function carregarTabelaRetirada() {
     try {
         const resposta = await fetch(url);
@@ -22,7 +20,7 @@ async function carregarTabelaRetirada() {
             const novaLinha = document.createElement("tr");
             novaLinha.innerHTML = `
                 <td>${item.material}</td>
-                <td>${item.quantidade}</td>
+                <td>${item.Qunatidade}</td>
             `;
             tabela.appendChild(novaLinha);
         });
@@ -31,7 +29,6 @@ async function carregarTabelaRetirada() {
     }
 }
 
-//valida a retirada
 function validarRetirada(estoqueAtual, quantidadeRetirada) {
     if (quantidadeRetirada <= 0) return false;
     return quantidadeRetirada <= estoqueAtual;
@@ -56,7 +53,7 @@ if (btnConfirmaRetirada) {
             return;
         }
 
-        const estoqueAtual = parseInt(item.quantidade);
+        const estoqueAtual = parseInt(item.Qunatidade);
 
         if (validarRetirada(estoqueAtual, qtdRetirada)) {
             const novaQuantidade = estoqueAtual - qtdRetirada;
@@ -64,7 +61,7 @@ if (btnConfirmaRetirada) {
             await fetch(`${url}/${item.Nome}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ quantidade: novaQuantidade })
+                body: JSON.stringify({ Qunatidade: novaQuantidade })
             });
 
             alert("Retirada realizada!");
