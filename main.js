@@ -77,6 +77,11 @@ btnCadastra.addEventListener('click', async () => {
     carregarTabela();
 });
 
+function validarRetirada(estoqueAtual, quantidadeRetirada) {
+    if (quantidadeRetirada <= 0) return false;
+    return quantidadeRetirada <= estoqueAtual;
+}
+
 carregarTabela();
 
 async function deletarItem(nome) {
