@@ -4,6 +4,7 @@ const btnCadastra = typeof document !== 'undefined' ? document.getElementById("b
 const tabela = typeof document !== 'undefined' ? document.getElementById("lista-materiais") : null;
 
 async function carregarTabela() {
+    if (typeof fetch === 'undefined') return;
     try {
         const respostaApi = await fetch(url);
         
