@@ -20,6 +20,10 @@
             Estoque/Dashboard
         </a>
 
+        <!-- Sprint 3 -->
+        <input type="text" id="input-busca" placeholder="Buscar material...">
+        <span id="total-itens"></span>
+
         <div class="products">
             <fieldset>
                 <label for="input-nome">
@@ -30,8 +34,7 @@
                     <option value="" selected disabled>
                         Lista de materiais
                     </option>
-
-                  <option value="Luvas de procedimento">Luvas de procedimento</option>
+                    <option value="Luvas de procedimento">Luvas de procedimento</option>
                     <option value="Máscaras cirúrgicas">Máscaras cirúrgicas</option>
                     <option value="Seringas 5 ml">Seringas 5 ml</option>
                     <option value="Agulhas 25x7">Agulhas 25x7</option>
@@ -55,9 +58,11 @@
                     min="1"
                 >
 
-                <button id="btn-cadastrar">
-                    Cadastrar
-                </button>
+                <button id="btn-cadastrar">Cadastrar</button>
+
+                <!-- Sprint 2 -->
+                <button id="input-retirada" style="display:none">Retirar Produtos</button>
+                <button id="btn-baixar" class="btn-baixar" style="display:none">Confirmar retirada</button>
             </div>
         </div>
 
