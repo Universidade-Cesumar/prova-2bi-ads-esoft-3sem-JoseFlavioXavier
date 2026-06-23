@@ -3,7 +3,6 @@ const url = "https://6a29f8bcf59cb8f65f1de3eb.mockapi.io/api/v1/Materiai";
 const btnCadastra = document.getElementById("btn-cadastrar");
 const tabela = document.getElementById("lista-materiais");
 
-// Função para buscar e exibir os dados
 async function carregarTabela() {
     try {
         const respostaApi = await fetch(url);
@@ -18,11 +17,15 @@ async function carregarTabela() {
             const novaLinha = document.createElement("tr");
             novaLinha.innerHTML = `
             <td>${item.material}</td>
-            <td>${item.quantidade}</td>
+            <td>${item.Qunatidade}</td>
             <td>
-                <button class="btn-excluir" onclick="deletarItem('${item.Nome}')">Excluir</button>
+                <button class="btn-excluir">Excluir</button>
             </td>
             `;
+
+            const btnExcluir = novaLinha.querySelector(".btn-excluir");
+            btnExcluir.addEventListener("click", () => deletarItem(item.Nome));
+
             tabela.appendChild(novaLinha);
         });
     } catch (erro) {
@@ -30,51 +33,67 @@ async function carregarTabela() {
     }
 }
 
-// Função para enviar os dados
 btnCadastra.addEventListener('click', async () => {
     const inputMaterial = document.getElementById("input-nome");
     const inputQuantidade = document.getElementById("input-quantidade");
 
-    const material = inputMaterial.value;
-    const quantidade = inputQuantidade.value;
+    const material = inputMaterial.value.trim();
+    const quantidade = parseInt(inputQuantidade.value);
 
     if (!quantidade || !material) {
         alert("Preencha todos os campos");
         return;
     }
-//envia para o banco
-    await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ material: material, quantidade: quantidade })
-    });
 
-//limpar
+    const respostaApi = await fetch(url);
+    const dados = await respostaApi.json();
+
+    const itemExistente = dados.find(
+        item => item.material.toLowerCase() === material.toLowerCase()
+    );
+
+    if (itemExistente) {
+        const novaQuantidade = parseInt(itemExistente.Qunatidade) + quantidade;
+
+        await fetch(`${url}/${itemExistente.Nome}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                material: itemExistente.material, 
+                Qunatidade: novaQuantidade 
+            })
+        });
+    } else {
+        await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ material: material, Qunatidade: quantidade })
+        });
+    }
+
     inputMaterial.value = "";
     inputQuantidade.value = "";
 
-    
     carregarTabela();
 });
 
-
 carregarTabela();
 
-async function deletarItem(id) {
-    if(!confirm("Tem certeza que deseja de excluir esse iten?"))
+async function deletarItem(nome) {
+    if (!confirm("Tem certeza que deseja excluir esse item?"))
         return;
-    try{
-        const resposta = await fetch(`${url}/${id}`,{
+    try {
+        const resposta = await fetch(`${url}/${nome}`, {
             method: 'DELETE'
         });
 
-        if(!resposta.ok){
+        if (!resposta.ok) {
             throw new Error("Erro ao deletar item");
         }
         
         carregarTabela();
         
-    } catch(erro){
+    } catch (erro) {
         console.error("Falha ao deletar o item", erro);
         alert("Falha ao excluir o item");
     }
