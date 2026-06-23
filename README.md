@@ -22,6 +22,7 @@ Sistema voltado para o controle de estoque de uma escola de enfermagem, visando 
 * Validação de retirada (Lógica de segurança de estoque).
 * Atualização de saldo (Baixa via método PUT).
 * Remoção de itens (DELETE).
+* Alerta de itens com baixo volume na aba de estoque.
 
 ### 🚀 Como executar
 
