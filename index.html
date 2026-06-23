@@ -4,64 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Projeto estoque</title>
+    <title>Projeto Estoque</title>
 </head>
 <body>
 
     <div class="products-container">
-        <h1>Estoque de materiais</h1>
+        <h1>Estoque de Materiais</h1>
         <p>Lista de materiais</p>
-        <a href="retirada.html">
-            <button class="button">Fazer uma retirada</button>
+
+        <a href="retirada.html" class="button">
+            Fazer uma retirada
         </a>
-        <a href="estoque.html">
-            <button class="button-estoque">Estoque/dashbord</button>
+
+        <a href="estoque.html" class="button-estoque">
+            Estoque/Dashboard
         </a>
-        
+
         <div class="products">
             <fieldset>
-                <label for="input-nome">Selecione uma opção de material para adicionar:</label>
+                <label for="input-nome">
+                    Selecione uma opção de material para adicionar:
+                </label>
+
                 <select name="material" id="input-nome">
-                    <option value="" disabled selected>Lista de materiais</option>
-                    <option value="Luvas-de-procedimento">Luvas de procedimento</option>
-                    <option value="Máscaras-cirúrgicas">Máscaras cirúrgicas</option>
-                    <option value="Seringas-5-ml">Seringas 5 ml</option>
-                    <option value="Agulhas-25x7">Agulhas 25x7</option>
-                    <option value="Gazes-estéreis">Gazes estéreis</option>
-                    <option value="Algodão-hidrófilo">Algodão hidrófilo</option>
-                    <option value="Álcool-70%">Álcool 70%</option>
-                    <option value="Soro-fisiológico-0,9%">Soro fisiológico 0,9%</option>
-                    <option value="Ataduras-de-crepe">Ataduras de crepe</option>
+                    <option value="" selected disabled>
+                        Lista de materiais
+                    </option>
+
+                  <option value="Luvas de procedimento">Luvas de procedimento</option>
+                    <option value="Máscaras cirúrgicas">Máscaras cirúrgicas</option>
+                    <option value="Seringas 5 ml">Seringas 5 ml</option>
+                    <option value="Agulhas 25x7">Agulhas 25x7</option>
+                    <option value="Gazes estéreis">Gazes estéreis</option>
+                    <option value="Algodão hidrófilo">Algodão hidrófilo</option>
+                    <option value="Álcool 70%">Álcool 70%</option>
+                    <option value="Soro fisiológico 0,9%">Soro fisiológico 0,9%</option>
+                    <option value="Ataduras de crepe">Ataduras de crepe</option>
                     <option value="Cotonetes">Cotonetes</option>
                     <option value="Glicosímetros">Glicosímetros</option>
-                    <option value="Fitas-de-glicose">Fitas de glicose</option>
-                    <option value="Termômetros-digitais">Termômetros digitais</option>
+                    <option value="Fitas de glicose">Fitas de glicose</option>
+                    <option value="Termômetros digitais">Termômetros digitais</option>
                 </select>
             </fieldset>
 
             <div class="button">
-                <input type="number" id="input-quantidade" placeholder="Ex: 4">
-                <button id="btn-cadastrar">Cadastrar</button>
+                <input
+                    type="number"
+                    id="input-quantidade"
+                    placeholder="Ex: 4"
+                    min="1"
+                >
+
+                <button id="btn-cadastrar">
+                    Cadastrar
+                </button>
             </div>
         </div>
-        
+
         <footer>
             <div>
                 <h2>Lista de materiais cadastrados</h2>
+
                 <table>
                     <thead>
                         <tr>
-                            <th>Materiais</th>
+                            <th>Material</th>
                             <th>Quantidade</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
+
                     <tbody id="lista-materiais"></tbody>
                 </table>
             </div>
         </footer>
     </div>
-    
+
     <script src="main.js"></script>
 </body>
 </html>
